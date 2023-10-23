@@ -63,6 +63,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
     RaffleState private s_raffleState;
 
     /* Events */
+    // event RequestedRaffleWinner(uint256 indexed requestId);
     event RequestedRaffleWinner(uint256 indexed requestId);
     event RaffleEnter(address indexed player);
     event WinnerPicked(address indexed player);
@@ -149,7 +150,9 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
             NUM_WORDS
         );
         // Quiz... is this redundant?
+        // emit RequestedRaffleWinner(requestId);
         emit RequestedRaffleWinner(requestId);
+
     }
 
     /**
@@ -182,10 +185,10 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     /** Getter Functions */
 
-    function getRaffleState() public view returns (RaffleState) {
+   
+    function getRaffleState() public view returns(RaffleState) {
         return s_raffleState;
     }
-
     function getNumWords() public pure returns (uint256) {
         return NUM_WORDS;
     }
@@ -194,9 +197,9 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         return REQUEST_CONFIRMATIONS;
     }
 
-    function getRecentWinner() public view returns (address) {
-        return s_recentWinner;
-    }
+    // function getRecentWinner() public view returns (address) {
+        //return s_recentWinner;
+    // }
 
     function getPlayer(uint256 index) public view returns (address) {
         return s_players[index];
@@ -216,5 +219,14 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     function getNumberOfPlayers() public view returns (uint256) {
         return s_players.length;
+    }
+    function getRecentWinner() external view returns (address) {
+        return s_recentWinner;
+    }
+    function getlengthOfPlayers() external view returns(uint) {
+        return s_players.length;
+    }
+    function getTheLastTimeStamp() external view returns (uint ){
+        return s_lastTimeStamp;
     }
 }
