@@ -43,7 +43,7 @@ contract helperConfig is Script{
         if (activeNetworkConfig.vrfCoordinatorV2 != address(0)) {
             return activeNetworkConfig;
         }
-        uint96 basefee = 0.25 ether;
+        uint96 basefee = 0.0025 ether;
         uint96 gaspricelink = 1e9;
         vm.startBroadcast();
         VRFCoordinatorV2Mock VRFCoordinatorMock = new VRFCoordinatorV2Mock (basefee , gaspricelink);
@@ -54,7 +54,7 @@ contract helperConfig is Script{
             gasLane:0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c, // keyHash
             interval: 30 seconds,
             entranceFee: 0.05 ether,
-            callbackGasLimit:5000,
+            callbackGasLimit:500000,
             vrfCoordinatorV2: address(VRFCoordinatorMock),
             link: address(linkToken),
             deployerKey : Default_anvil_key
